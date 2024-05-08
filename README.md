@@ -48,11 +48,7 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 
 |Network|Slug|Status|
 |------------------|------|:----:|
-| Mode Sepolia|mode-sepolia-vtnhnpim72|✅|
-| Mode Mainnet|mode-mainnet-0|✅|
-| Zora Sepolia|zora-sepolia-0thyhxtf5e|✅|
-| Zora Mainnet|zora-mainnet-0|✅|
-| PGN Sepolia|pgn-sepolia-i4td3ji6i0|✅|
+| Metal L2|metal-mainnet-0|✅|
 
 ### Usage
 
