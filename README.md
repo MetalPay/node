@@ -55,7 +55,7 @@ If you encounter problems with your node, please open a [GitHub issue](https://g
 1. Select the network you want to run and set `CONDUIT_NETWORK` env variable. You will need to know the `slug` of the network. You can find this in the Conduit console. For public networks you can use the table above. Example:
 
 ```
-# for Mode Mainnet
+# for Metal Mainnet
 export CONDUIT_NETWORK=metal-mainnet-0
 ```
 
