@@ -90,4 +90,6 @@ exec geth \
 	--rollup.sequencerhttp="$OP_GETH_SEQUENCER_HTTP" \
 	--port="$P2P_PORT" \
 	--override.fjord=1720627201 \
+	--rollup.superchain-upgrades \
+	--rollup.halt=major \
 	$ADDITIONAL_ARGS # intentionally unquoted
