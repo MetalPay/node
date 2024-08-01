@@ -103,7 +103,12 @@ services:
 
 ### Snapshots
 
-Not yet available. We're working on it 🏗️
+To get started quickly you can download a snapshot provided by us.
+
+```sh
+wget https://metall2-snapshots-mainnet-archive.s3.amazonaws.com/latest.tar.zst
+tar --use-compress-program=unzstd -xvf latest.tar.zst -C geth-data/
+```
 
 ### Syncing
 
