@@ -1,4 +1,4 @@
-ARG OP_GETH_VERSION=v1.101411.6
+ARG OP_GETH_VERSION=v1.101500.1
 FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:${OP_GETH_VERSION}
 
 RUN apk add --no-cache jq curl
