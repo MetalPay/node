@@ -1,4 +1,4 @@
-ARG OP_NODE_VERSION=v1.11.2
+ARG OP_NODE_VERSION=v1.12.1
 FROM us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:${OP_NODE_VERSION}
 
 RUN apk add --no-cache jq curl
