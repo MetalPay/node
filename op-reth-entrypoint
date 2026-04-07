@@ -1,0 +1,44 @@
+#!/bin/sh
+set -eu
+
+VERBOSITY=${RETH_VERBOSITY:-3}
+RETH_DATA_DIR=/data
+GETH_CHAINDATA_DIR="$RETH_DATA_DIR/reth/chaindata"
+OP_GETH_GENESIS_FILE_PATH="${OP_GETH_GENESIS_FILE_PATH:-/genesis.json}"
+RPC_PORT="${RPC_PORT:-8545}"
+WS_PORT="${WS_PORT:-8546}"
+AUTHRPC_PORT="${AUTHRPC_PORT:-8551}"
+METRICS_PORT="${METRICS_PORT:-6060}"
+HOST_IP="0.0.0.0"
+P2P_PORT="${P2P_PORT:-30303}"
+ADDITIONAL_ARGS=""
+
+echo -n "$CONDUIT_OP_NODE_L2_ENGINE_AUTH_RAW" > "$OP_NODE_L2_ENGINE_AUTH"
+
+mkdir -p $RETH_DATA_DIR
+
+exec op-reth node \
+--datadir="$RETH_DATA_DIR" \
+--log.stdout.filter="$VERBOSITY" \
+--http \
+--http.corsdomain="*" \
+--http.addr=0.0.0.0 \
+--http.port="$RPC_PORT" \
+--http.api=web3,debug,eth,net \
+--authrpc.addr=0.0.0.0 \
+--authrpc.port="$AUTHRPC_PORT" \
+--authrpc.jwtsecret="$OP_NODE_L2_ENGINE_AUTH" \
+--ws \
+--ws.addr=0.0.0.0 \
+--ws.port="$WS_PORT" \
+--ws.origins="*" \
+--ws.api=debug,eth,net \
+--metrics=0.0.0.0:"$METRICS_PORT" \
+--full \
+--disable-discovery \
+--max-outbound-peers=100 \
+--nat=extip:"$HOST_IP" \
+--chain=metal \
+--rollup.sequencer-http="$OP_RETH_SEQUENCER_HTTP" \
+--port="$P2P_PORT" \
+$ADDITIONAL_ARGS # intentionally unquoted

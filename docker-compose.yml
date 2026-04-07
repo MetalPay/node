@@ -1,31 +1,32 @@
 version: '3.8'
 
 services:
-  op-geth: # this is Optimism's geth client
+  op-reth: # this is Optimism's reth client
     pull_policy: always
     build:
       context: .
-      dockerfile: op-geth.Dockerfile
+      dockerfile: op-reth.Dockerfile
     ports:
       - 8545:8545       # RPC
       - 8546:8546       # websocket
+      - 8551:8551       # AuthRPC
       - 30303:30303     # P2P TCP (currently unused)
       - 30303:30303/udp # P2P UDP (currently unused)
       - 7301:6060       # metrics
     env_file:
       - .env.default
-      - networks/${CONDUIT_NETWORK:?set network}/.env
+      - networks/metal-mainnet-0/.env
       - .env
     volumes:
-      #- ./geth-data/:/data # enable to have persistency between restarts
-      - ./networks/${CONDUIT_NETWORK:?set network}/genesis.json:/genesis.json
+      - ./geth-data/:/data # enable to have persistency between restarts
+      - ./networks/metal-mainnet-0/genesis.json:/genesis.json
   op-node:
     pull_policy: always
     build:
       context: .
       dockerfile: op-node.Dockerfile
     depends_on:
-      - op-geth
+      - op-reth
     ports:
       - 7545:8545     # RPC
       - 9222:9222     # P2P TCP
@@ -34,8 +35,8 @@ services:
       - 6060:6060     # pprof
     env_file:
       - .env.default
-      - networks/${CONDUIT_NETWORK:?set network}/.env
+      - networks/metal-mainnet-0/.env
       - .env
     volumes:
-      - ./networks/${CONDUIT_NETWORK:?set network}/rollup.json:/rollup.json
-      - ./networks/${CONDUIT_NETWORK:?set network}/genesis.json:/genesis.json
+      - ./networks/metal-mainnet-0/rollup.json:/rollup.json
+      - ./networks/metal-mainnet-0/genesis.json:/genesis.json
